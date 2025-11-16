@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notepalooza AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="sparkle-bg"></div>
+    <header class="hero" id="top">
+      <div class="hero__content">
+        <p class="tag">Smart • Fun • Youthful • Tech-forward</p>
+        <h1>Notepalooza AI</h1>
+        <p class="subtitle">Turn your notes into smart revision tools — instantly.</p>
+        <div class="cta-group">
+          <a class="btn primary" href="#app">Launch the App</a>
+          <a class="btn secondary" href="#premium">Compare Plans</a>
+        </div>
+        <div class="pill">
+          <span>New</span>
+          <p>AI-powered study magic for students everywhere.</p>
+        </div>
+      </div>
+      <div class="hero__phone">
+        <div class="phone">
+          <div class="phone__screen">
+            <p class="phone__title">Notepalooza AI</p>
+            <p class="phone__subtitle">Make your notes smarter. Instantly.</p>
+            <div class="sparkles"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel panel--workspace" id="workspace">
+        <div class="panel__header">
+          <p class="eyebrow">Interactive Studio</p>
+          <h2>Use the Notepalooza GUI to run every AI transformation.</h2>
+          <p>
+            The dashboard below groups capture, modes, and outputs into one live interface so you can paste notes,
+            pick a plan, and download study assets without leaving the page.
+          </p>
+        </div>
+        <div class="workspace-grid">
+          <div class="workspace-card input-card">
+            <div class="input-card__header">
+              <div>
+                <h3>Paste or type your notes</h3>
+                <p>We keep everything local in your browser. Nothing leaves your device.</p>
+              </div>
+              <button class="ghost-link" id="clearInput" type="button">Clear</button>
+            </div>
+            <textarea
+              id="noteInput"
+              placeholder="Copy lecture notes, textbook excerpts, or lab write-ups here..."
+              rows="14"
+            ></textarea>
+            <div class="input-tools">
+              <label class="upload-btn">
+                <input type="file" id="textUpload" accept=".txt,.md,.rtf,.csv,.json" />
+                <span>📂 Upload text file</span>
+              </label>
+              <button class="tool-btn" type="button" id="sampleBtn">Load sample notes</button>
+              <button class="tool-btn" type="button" id="focusInput">Focus input</button>
+            </div>
+            <p class="input-meta">
+              <span id="noteStats">0 words • 0 characters</span>
+              <span id="conversionInfo">Free plan • 3 conversions left</span>
+            </p>
+            <div class="capture-tip">
+              <p>Need handwriting? snap a pic, transcribe, and paste it here.</p>
+              <p class="microcopy">Pro tip: Keep paragraphs short so AI can build better flashcards.</p>
+            </div>
+            <div class="capture-stack">
+              <button class="action-card" data-sample="photo">
+                <span>📸</span>
+                Take a Photo
+                <small>Loads a handwriting sample.</small>
+              </button>
+              <button class="action-card" data-trigger="upload">
+                <span>📂</span>
+                Upload Notes
+                <small>Open the text uploader.</small>
+              </button>
+              <button class="action-card" data-sample="textbook">
+                <span>📖</span>
+                Textbook Scan
+                <small>Loads a science excerpt.</small>
+              </button>
+              <button class="action-card" data-sample="pdf">
+                <span>📄</span>
+                Convert PDF
+                <small>Loads a case study summary.</small>
+              </button>
+            </div>
+          </div>
+
+          <div class="workspace-card control-card">
+            <p class="eyebrow">Plan Switcher</p>
+            <div class="plan-switch" id="planSwitch">
+              <button class="plan-btn active" data-plan="free">Free</button>
+              <button class="plan-btn" data-plan="plus">Plus</button>
+            </div>
+            <p id="planDescription">Free plan includes summaries, flashcards, quizzes, and study guides.</p>
+            <div class="mode-wrapper">
+              <p class="eyebrow">Modes</p>
+              <div class="mode-grid" id="modeButtons">
+                <button class="mode-btn active" data-mode="summary">Summary</button>
+                <button class="mode-btn" data-mode="flashcards">Flashcards</button>
+                <button class="mode-btn" data-mode="quizzes">Quiz Builder</button>
+                <button class="mode-btn" data-mode="study">Study Guide</button>
+                <button class="mode-btn" data-mode="timetable">Revision Timetable</button>
+                <button class="mode-btn premium" data-mode="mindmap" data-tier="plus">Mind Map (Plus)</button>
+                <button class="mode-btn premium" data-mode="tutor" data-tier="plus">AI Tutor (Plus)</button>
+              </div>
+            </div>
+            <div class="preview-card" id="modePreview">
+              <h3>Smart Summary</h3>
+              <p>Pick a mode and Notepalooza will instantly create the perfect study asset.</p>
+            </div>
+            <button class="btn primary" id="generateBtn">Generate with AI</button>
+            <p class="microcopy">Need to tweak the output? Hit regenerate after editing your notes.</p>
+          </div>
+
+          <div class="workspace-card output-card">
+            <div class="result-card live-output">
+              <div class="result-card__header">
+                <div>
+                  <p class="eyebrow" id="resultMode">Summary</p>
+                  <h3 id="resultTitle">Your study magic will appear here.</h3>
+                </div>
+                <div class="result-actions">
+                  <button class="btn secondary ghost" id="copyResult">Copy</button>
+                  <button class="btn secondary ghost" id="downloadResult">Download</button>
+                  <button class="btn secondary ghost" id="regenerate">Regenerate</button>
+                </div>
+              </div>
+              <pre id="resultBody">Select a mode and press generate to see the output.</pre>
+            </div>
+            <p class="app-notice" id="appNotice" role="status">Ready when you are.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel--split" id="premium">
+        <div class="panel__info">
+          <p class="eyebrow">Notepalooza Plans</p>
+          <h2>Free or Plus — pick your study power.</h2>
+          <p>Every plan includes secure local processing. Upgrade for unlimited conversions and premium modes.</p>
+          <div class="plan-cards">
+            <article class="plan-card" data-plan-target="free">
+              <p class="plan-name">Free</p>
+              <p class="plan-price">£0</p>
+              <ul>
+                <li>3 conversions / day</li>
+                <li>Summaries, flashcards, quizzes, guides</li>
+                <li>Community templates</li>
+                <li>Ad-supported experience</li>
+              </ul>
+              <button class="btn secondary" data-plan="free">Stay on Free</button>
+            </article>
+            <article class="plan-card plan-card--highlight" data-plan-target="plus">
+              <p class="plan-name">Notepalooza Plus</p>
+              <p class="plan-price">£6.99<span>/ month</span></p>
+              <p class="plan-year">or £49 billed yearly</p>
+              <ul>
+                <li>Unlimited conversions + exports</li>
+                <li>Revision timetable + smart reminders</li>
+                <li>Mind map builder & AI tutor</li>
+                <li>Priority support + no ads</li>
+              </ul>
+              <button class="btn primary" data-plan="plus">Upgrade to Plus</button>
+            </article>
+          </div>
+        </div>
+        <div class="panel__visual">
+          <div class="plus-card">
+            <p class="plus-tag">Premium Power</p>
+            <h3>Need a revision hero?</h3>
+            <p>AI tutor + mind map + unlimited exports.</p>
+          </div>
+          <div class="plus-card alt">
+            <p class="plus-tag">Students ❤️</p>
+            <p>“Instant revision. Zero stress.”</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="prompts">
+        <div class="panel__header">
+          <p class="eyebrow">AI Prompts</p>
+          <h2>Custom Notepalooza instructions.</h2>
+          <p>Drop these prompts into your favorite AI workspace to recreate the magic.</p>
+        </div>
+        <div class="prompt-grid">
+          <article>
+            <h3>Flashcards</h3>
+            <pre>You are Notepalooza AI. Turn the text below into clear, exam-ready flashcards.
+Use this format:
+
+Q: ...
+A: ...
+
+Make 20+ flashcards that test definitions, understanding, and applications.
+
+TEXT:
+{{user_text}}</pre>
+          </article>
+          <article>
+            <h3>Summary</h3>
+            <pre>You are Notepalooza AI. Create a clean, structured, exam-ready summary.
+Use bullet points, subheadings, and simple language while keeping accuracy.
+
+TEXT:
+{{user_text}}</pre>
+          </article>
+          <article>
+            <h3>Quiz</h3>
+            <pre>You are Notepalooza AI. Create a 10-question quiz:
+- 5 short answer
+- 3 medium
+- 2 long answer
+Provide answers at the end.
+
+TEXT:
+{{user_text}}</pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel panel--contrast" id="marketing">
+        <div class="panel__header">
+          <p class="eyebrow">Marketing Scripts</p>
+          <h2>Bring the Notepalooza hype.</h2>
+        </div>
+        <div class="marketing-grid">
+          <article>
+            <h3>TikTok Script 1</h3>
+            <p>
+              “Messy notes?<br />Take a picture…<br />Let Notepalooza AI turn it into perfect exam notes in
+              seconds.”
+            </p>
+            <p>Show flashcards, summary, quiz popping up.<br />“Study smarter, not harder.”</p>
+          </article>
+          <article>
+            <h3>TikTok Script 2</h3>
+            <p>
+              POV: You procrastinated all week.<br />Your notes? A disaster.<br />Notepalooza AI: “I got you.”
+            </p>
+            <p>BOOM — instant revision pack.</p>
+          </article>
+          <article>
+            <h3>Taglines</h3>
+            <ul>
+              <li>Your notes. Upgraded.</li>
+              <li>Instant revision. Zero stress.</li>
+              <li>AI-powered study magic.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© Notepalooza AI — Global & Accessible Study Power</p>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
